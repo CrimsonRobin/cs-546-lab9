@@ -18,18 +18,20 @@ A button to submit the form
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Whole Text Analyzer Application</title>
+    <script src="../public/js/text_analyzer.js" defer></script>
+    <link rel="stylesheet" href="../public/css/styles.css">
  </head>
  <body>
     <header>
         <h1>The Whole Text Analyzer Application</h1>
     </header>
     <main>
+        <div id="error" hidden>Error: Please Input a Valid String</div> <br>
         <div id="text_output">
-            <form>
+            <form id="form">
                 <label for="text_to_analyze">Input</label> <br>
-                <textarea name="text_to_analyze" id="text_to_analyze">
-                </textarea> <br>
-                <input type="submit">
+                <textarea name="text_to_analyze" id="text_to_analyze"></textarea> <br>
+                <button type="submit">Submit</button>
             </form>
         </div>
     </main>

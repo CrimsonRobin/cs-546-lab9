@@ -1,3 +1,38 @@
 /*
 You will style your page using at least 5 CSS selectors for general CSS styling. You will place the CSS in its own file. 
 */
+
+h1 {
+    color: crimson;
+}
+
+body {
+    text-align: center;
+}
+
+div#error {
+    font-weight: bold;
+    font-size: larger;
+}
+
+dt {
+    color: darkslateblue;
+}
+
+dl {
+    color: cornflowerblue;
+}
+
+label {
+    text-decoration: underline;
+    font-size: large;
+}
+
+footer {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: blue;
+    text-align: center;
+}

@@ -197,3 +197,105 @@ If the user does not have a value for the input when they submit, you should not
 
 The form should reset itself every time after an input has been processed.
 */
+
+let div = document.getElementById("text_output");
+let errordiv = document.getElementById("error");
+let form = document.getElementById("form");
+let text = document.getElementById("text_to_analyze");
+
+if(form) {
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    let trimmedText = text.value.trim();
+    if(trimmedText) {
+      errordiv.hidden = true;
+
+      let dl = document.createElement("dl");
+      let originalInputTitle = document.createElement("dt");
+      originalInputTitle.innerHTML = "Original Input:";
+      dl.appendChild(originalInputTitle);
+      let originalInput = document.createElement("dd");
+      originalInput.innerHTML = trimmedText;
+      dl.appendChild(originalInput);
+
+      let trimmedLowerText = trimmedText.toLowerCase();
+      
+      let numLettersTitle = document.createElement("dt");
+      numLettersTitle.innerHTML = "Total Number of Letters";
+      dl.appendChild(numLettersTitle);
+      let numLetters = document.createElement("dd");
+      let val = [...trimmedLowerText.matchAll(/[a-z]/g)].length;
+      numLetters.innerHTML = val;
+      dl.appendChild(numLetters);
+
+      let numNonLettersTitle = document.createElement("dt");
+      numNonLettersTitle.innerHTML = "Total Number of Non-Letters";
+      dl.appendChild(numNonLettersTitle);
+      let numNonLetters = document.createElement("dd");
+      val = [...trimmedLowerText.matchAll(/[^a-z]/g)].length;
+      numNonLetters.innerHTML = val;
+      dl.appendChild(numNonLetters);
+
+      let numVowelsTitle = document.createElement("dt");
+      numVowelsTitle.innerHTML = "Total Number of Vowels";
+      dl.appendChild(numVowelsTitle);
+      let numVowels = document.createElement("dd");
+      val = [...trimmedLowerText.matchAll(/[aeiou]/g)].length;
+      numVowels.innerHTML = val;
+      dl.appendChild(numVowels);
+
+      let numConsonantsTitle = document.createElement("dt");
+      numConsonantsTitle.innerHTML = "Total Number of Consonants";
+      dl.appendChild(numConsonantsTitle);
+      let numConsonants = document.createElement("dd");
+      val = [...trimmedLowerText.matchAll(/[b-df-hj-np-tv-z]/g)].length;
+      numConsonants.innerHTML = val;
+      dl.appendChild(numConsonants);
+
+      let numWordsTitle = document.createElement("dt");
+      numWordsTitle.innerHTML = "Total Number of Words";
+      dl.appendChild(numWordsTitle);
+      let numWords = document.createElement("dd");
+      val = trimmedLowerText.split(/[^a-z]/g).filter((el) => el.length > 0).length;
+      //console.log(trimmedLowerText.split(/[^a-z]/g));
+      numWords.innerHTML = val;
+      dl.appendChild(numWords);
+
+      let numUniqueWordsTitle = document.createElement("dt");
+      numUniqueWordsTitle.innerHTML = "Total Number of Unique Words";
+      dl.appendChild(numUniqueWordsTitle);
+      let numUniqueWords = document.createElement("dd");
+      val = new Set(trimmedLowerText.split(/[^a-z]/g).filter((el) => el.length > 0));
+      numUniqueWords.innerHTML = val.size;
+      dl.appendChild(numUniqueWords);
+
+      let numLongWordsTitle = document.createElement("dt");
+      numLongWordsTitle.innerHTML = "Total Number of Long Words";
+      dl.appendChild(numLongWordsTitle);
+      let numLongWords = document.createElement("dd");
+      val = trimmedLowerText.split(/[^a-z]/g).filter((word) => word.length >= 6).length;
+      numLongWords.innerHTML = val;
+      dl.appendChild(numLongWords);
+
+      let numShortWordsTitle = document.createElement("dt");
+      numShortWordsTitle.innerHTML = "Total Number of Short Words";
+      dl.appendChild(numShortWordsTitle);
+      let numShortWords = document.createElement("dd");
+      val = trimmedLowerText.split(/[^a-z]/g).filter((word) => word.length <= 3 && word.length > 0).length;
+      numShortWords.innerHTML = val;
+      dl.appendChild(numShortWords);
+
+      div.appendChild(dl);
+
+      form.reset();
+      text.focus();
+    }
+    else {
+      //bad input
+      text.value = '';
+      text.focus();
+      form.reset();
+      errordiv.hidden = false;
+    }
+});
+}

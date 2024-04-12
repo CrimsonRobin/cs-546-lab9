@@ -8,11 +8,7 @@ import express from 'express';
 const app = express();
 import configRoutes from './routes/index.js';
 
-const staticDir = express.static('public');
-
-app.use('/public', staticDir);
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use('/public', express.static('public'));
 
 configRoutes(app);
 
